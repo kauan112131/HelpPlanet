@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/nav_graph"
+    app:startDestination="@id/homeFragment">
+
+    <!-- TELA INICIAL -->
+    <fragment
+        android:id="@+id/homeFragment"
+        android:name="com.example.helpplanet.ui.home.HomeFragment"
+        android:label="Home">
+
+        <!-- Ir da Home para lista -->
+        <action
+            android:id="@+id/action_homeFragment_to_listarDesafiosFragment"
+            app:destination="@id/listarDesafiosFragment" />
+
+        <!-- Ir da Home para detalhes -->
+        <action
+            android:id="@+id/action_homeFragment_to_detalhesFragment"
+            app:destination="@id/detalhesFragment" />
+
+    </fragment>
+
+    <!-- LISTA DE DESAFIOS -->
+    <fragment
+        android:id="@+id/listarDesafiosFragment"
+        android:name="com.example.helpplanet.ui.listar.ListarDesafiosFragment"
+        android:label="Desafios">
+
+        <!-- Ir da lista para detalhes -->
+        <action
+            android:id="@+id/action_listarDesafiosFragment_to_detalhesFragment"
+            app:destination="@id/detalhesFragment" />
+    </fragment>
+
+    <!-- DETALHES DO DESAFIO -->
+    <fragment
+        android:id="@+id/detalhesFragment"
+        android:name="com.example.helpplanet.ui.detalhes.DetalhesFragment"
+        android:label="Detalhes">
+
+        <argument
+            android:name="id"
+            app:argType="integer" />
+
+        <argument
+            android:name="titulo"
+            app:argType="string" />
+
+        <argument
+            android:name="descricao"
+            app:argType="string" />
+
+    </fragment>
+
+</navigation>

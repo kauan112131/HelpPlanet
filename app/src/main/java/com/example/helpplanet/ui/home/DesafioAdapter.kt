@@ -3,14 +3,26 @@ package com.example.helpplanet.ui.home
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
+import com.example.helpplanet.data.model.Desafio
 import com.example.helpplanet.databinding.ItemDesafioBinding
 
-class HomeAdapter(
-    private val lista: List<String>
-) : RecyclerView.Adapter<HomeAdapter.ViewHolder>() {
+class DesafioAdapter(
+    private val lista: List<Desafio>,
+    private val onClick: (Desafio) -> Unit
+) : RecyclerView.Adapter<DesafioAdapter.ViewHolder>() {
 
     inner class ViewHolder(val binding: ItemDesafioBinding) :
-        RecyclerView.ViewHolder(binding.root)
+        RecyclerView.ViewHolder(binding.root) {
+
+        fun bind(item: Desafio) {
+            binding.txtTitulo.text = item.title
+            binding.txtDescricao.text = item.body
+
+            binding.root.setOnClickListener {
+                onClick(item)
+            }
+        }
+    }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val binding = ItemDesafioBinding.inflate(
@@ -22,8 +34,7 @@ class HomeAdapter(
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        val item = lista[position]
-        holder.binding.txtTitulo.text = item
+        holder.bind(lista[position])
     }
 
     override fun getItemCount() = lista.size

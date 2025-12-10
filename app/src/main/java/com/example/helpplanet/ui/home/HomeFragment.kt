@@ -1,13 +1,12 @@
-package ui.home
+package com.example.helpplanet.ui.home
 
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.navigation.fragment.findNavController
 import com.example.helpplanet.databinding.FragmentHomeBinding
-import com.example.helpplanet.ui.home.HomeAdapter
 
 class HomeFragment : Fragment() {
 
@@ -26,19 +25,15 @@ class HomeFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        // Exemplo simples de configuração da RecyclerView
-        binding.recyclerDesafios.apply {
-            layoutManager = LinearLayoutManager(requireContext())
-            adapter = HomeAdapter(getFakeList())
-        }
-    }
+        binding.btnIrParaDetalhes.setOnClickListener {
+            val action = HomeFragmentDirections.actionHomeFragmentToDetalhesFragment(
+                id = 1, // coloque qualquer número por enquanto
+                titulo = "Como Descatar Plástico",
+                descricao = "O plástico deve ser limpo e colocado no lixo reciclável na cor vermelha."
+            )
+            findNavController().navigate(action)
 
-    private fun getFakeList(): List<String> {
-        return listOf(
-            "Desafio 1: Economizar Água",
-            "Desafio 2: Reduzir Resíduos",
-            "Desafio 3: Usar Transporte Sustentável"
-        )
+        }
     }
 
     override fun onDestroyView() {

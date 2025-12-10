@@ -1,3 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <!-- App -->
     <string name="app_name">HelpPlanet</string>
+
+    <!-- Home / gerais -->
+    <string name="tela_principal_desc">Tela principal do aplicativo</string>
+    <string name="texto_boas_vindas_desc">Mensagem de boas-vindas exibida na tela inicial</string>
+
+    <!-- Lista de desafios -->
+    <string name="titulo_lista_desafios">Desafios sustentáveis</string>
+    <string name="tela_lista_desafios_desc">Tela que exibe a lista de desafios sustentáveis</string>
+    <string name="lista_de_desafios_desc">Lista de desafios disponíveis</string>
+
+    <!-- Mensagens / UI -->
+    <string name="carregando">Carregando...</string>
+    <string name="erro_carregar_desafios">Erro ao carregar desafios. Tente novamente.</string>
+    <string name="nenhum_desafio">Nenhum desafio encontrado.</string>
+
+    <!-- Cards -->
+    <string name="card_desafio_desc">Card contendo informações sobre um desafio</string>
+    <string name="titulo_do_desafio_desc">Título do desafio</string>
+    <string name="descricao_do_desafio_desc">Descrição do desafio</string>
+
+    <!-- Detalhes -->
+    <string name="icone_desafio_desc">Ícone ilustrativo do desafio</string>
+
+    <string name="tela_detalhes_desc">Tela com detalhes do desafio</string>
+    <string name="botao_ver_detalhes">Ver detalhes</string>
 </resources>
