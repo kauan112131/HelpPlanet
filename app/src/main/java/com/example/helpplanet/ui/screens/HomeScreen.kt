@@ -14,7 +14,8 @@ import com.example.helpplanet.viewmodel.WeatherUiState
 import com.example.helpplanet.viewmodel.WeatherViewModel
 import com.example.helpplanet.ui.components.ChallengeItem
 import androidx.compose.ui.Alignment
-
+import androidx.compose.ui.semantics.contentDescription
+import androidx.compose.ui.semantics.semantics
 
 
 @Composable
@@ -24,48 +25,80 @@ fun HomeScreen(
 ) {
     val uiState by weatherViewModel.uiState.collectAsState()
 
-
     LaunchedEffect(Unit) {
         weatherViewModel.loadWeather(-8.05, -34.9)
     }
 
+    Surface(
+        modifier = Modifier.fillMaxSize(),
+        color = MaterialTheme.colorScheme.background
+    ) {
+        when (uiState) {
 
-    when (uiState) {
-        is WeatherUiState.Loading -> {
-            Box(modifier = Modifier.fillMaxSize(), contentAlignment = Alignment.Center) {
-                CircularProgressIndicator()
-            }
-        }
-
-
-        is WeatherUiState.Error -> {
-            Box(modifier = Modifier.fillMaxSize(), contentAlignment = Alignment.Center) {
-                Text(text = "Erro ao carregar desafios")
-            }
-        }
-
-
-        is WeatherUiState.Success -> {
-            val challenges = listOf(
-                EcoChallenge(1, "Economizar água", "Reduza o tempo do banho hoje"),
-                EcoChallenge(2, "Reduzir plástico", "Evite copos descartáveis"),
-                EcoChallenge(3, "Economizar energia", "Desligue aparelhos da tomada")
-            )
-
-
-            LazyColumn(
-                modifier = Modifier
-                    .fillMaxSize()
-                    .padding(16.dp),
-                verticalArrangement = Arrangement.spacedBy(12.dp)
-            ) {
-                items(challenges) { challenge ->
-                    ChallengeItem(
-                        challenge = challenge,
-                        onClick = {
-                            onChallengeClick(challenge.id)
+            is WeatherUiState.Loading -> {
+                Box(
+                    modifier = Modifier.fillMaxSize(),
+                    contentAlignment = Alignment.Center
+                ) {
+                    CircularProgressIndicator(
+                        color = MaterialTheme.colorScheme.onBackground,
+                        modifier = Modifier.semantics {
+                            contentDescription = "Carregando desafios sustentáveis"
                         }
                     )
+                }
+            }
+
+            is WeatherUiState.Error -> {
+                Box(
+                    modifier = Modifier.fillMaxSize(),
+                    contentAlignment = Alignment.Center
+                ) {
+                    Text(
+                        text = "Erro ao carregar dados. Verifique sua conexão.",
+                        color = MaterialTheme.colorScheme.onBackground
+                    )
+                }
+            }
+
+            is WeatherUiState.Success -> {
+
+                val challenges = listOf(
+                    EcoChallenge(1, "Economizar água", "Reduza o tempo do banho hoje"),
+                    EcoChallenge(2, "Reduzir plástico", "Evite copos descartáveis"),
+                    EcoChallenge(3, "Economizar energia", "Desligue aparelhos da tomada")
+                )
+
+                Column(
+                    modifier = Modifier
+                        .fillMaxSize()
+                        .padding(top = 32.dp, start = 16.dp, end = 16.dp),
+                    verticalArrangement = Arrangement.spacedBy(16.dp)
+                ) {
+
+                    Text(
+                        text = "HelpPlanet 🌱",
+                        style = MaterialTheme.typography.titleLarge,
+                        color = MaterialTheme.colorScheme.onBackground
+                    )
+
+                    Text(
+                        text = "Pequenas ações diárias fazem grande diferença para o planeta.",
+                        style = MaterialTheme.typography.bodyMedium,
+                        color = MaterialTheme.colorScheme.onBackground
+                    )
+
+                    LazyColumn(
+                        modifier = Modifier.fillMaxSize(),
+                        verticalArrangement = Arrangement.spacedBy(12.dp)
+                    ) {
+                        items(challenges) { challenge ->
+                            ChallengeItem(
+                                challenge = challenge,
+                                onClick = { onChallengeClick(challenge.id) }
+                            )
+                        }
+                    }
                 }
             }
         }

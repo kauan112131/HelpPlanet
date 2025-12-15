@@ -4,6 +4,7 @@ package com.example.helpplanet.ui.components
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.material3.Card
+import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -19,24 +20,29 @@ fun ChallengeItem(
     challenge: EcoChallenge,
     onClick: () -> Unit
 ) {
-     Card(
-         modifier = Modifier
-             .fillMaxWidth()
-             .clickable { onClick() }
-             .semantics {
-                 contentDescription = "Desafio ecológico: ${challenge.title}"
-             }
-     ) {
-         Column(modifier = Modifier.padding(16.dp)) {
-             Text(
-                 text = challenge.title,
-                 style = MaterialTheme.typography.titleMedium
-             )
-             Spacer(modifier = Modifier.height(4.dp))
-             Text(
-                 text = challenge.description,
-                 style = MaterialTheme.typography.bodyMedium
-             )
-         }
-     }
- }
+    Card(
+        modifier = Modifier.fillMaxWidth(),
+        onClick = onClick,
+        colors = CardDefaults.cardColors(
+            containerColor = MaterialTheme.colorScheme.secondary
+        ),
+        elevation = CardDefaults.cardElevation(defaultElevation = 6.dp)
+    ) {
+        Column(
+            modifier = Modifier.padding(16.dp),
+            verticalArrangement = Arrangement.spacedBy(6.dp)
+        ) {
+            Text(
+                text = challenge.title,
+                style = MaterialTheme.typography.titleMedium,
+                color = MaterialTheme.colorScheme.onSecondary
+            )
+
+            Text(
+                text = challenge.description,
+                style = MaterialTheme.typography.bodyMedium,
+                color = MaterialTheme.colorScheme.onSecondary
+            )
+        }
+    }
+}
