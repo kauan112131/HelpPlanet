@@ -6,3 +6,5 @@ data class EcoChallenge(
     val description: String,
     val completed: Boolean = false
 )
+
+//modelo
